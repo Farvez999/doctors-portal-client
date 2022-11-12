@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import BookingModal from '../BookingModal';
 import AppoinmentOption from './AppoinmentOption';
 
 const AvailableAppoinment = () => {
@@ -20,9 +21,15 @@ const AvailableAppoinment = () => {
                     appointmentOptions.map(appointmentOption => <AppoinmentOption
                         key={appointmentOption._id}
                         appointmentOption={appointmentOption}
+                        setTreatment={setTreatment}
                     ></AppoinmentOption>)
                 }
             </div>
+            {
+                treatment &&
+                <BookingModal
+                    treatment={treatment}
+                ></BookingModal>}
         </div>
     );
 };
