@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { SignUp } = useContext(AuthContext)
 
     const handleSignUp = data => {
         console.log(data)
+
+        SignUp(data.email, data.password)
+            .then((result) => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
 
@@ -40,7 +51,7 @@ const SignUp = () => {
                         </label>
                         <input {...register("password", {
                             required: "Password Address is required", minLength: { value: 6, message: 'Passwor must be 6 characters or longer' }, pattern: {
-                                value: /(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]/, message: "Entered value does not match password format"
+                                value: /(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]/, message: "Passwor must uper & lower case letters or numbers"
                             }
                         })} type="password" className="input input-bordered w-full max-w-xs" />
                         {errors.password && <p className='text-red-500' role="alert">{errors.password?.message}</p>}
