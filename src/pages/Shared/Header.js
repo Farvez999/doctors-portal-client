@@ -4,7 +4,13 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Header = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .then(error => console.log(error))
+    }
 
     const menuItem = <>
         <li className='font-semibold'><Link to='/'>Home</Link></li>
@@ -13,19 +19,14 @@ const Header = () => {
         <li className='font-semibold'><Link to='/reviews'>Reviews</Link></li>
         <li className='font-semibold'><Link to='/contactUs'>Contact Us</Link></li>
         {
-            user?.uid ? <li className='font-semibold'><Link to='/signup'>Sign out</Link></li>
-                :
-                <li className='font-semibold'><Link to='/login'>Login</Link></li>
-        }
-        {/* {
-            user?.email ?
+            user?.uid ?
                 <>
-                    <li className='font-semibold'><Link to='/orders'>Orders</Link></li>
-                    <li className='font-semibold'><button onClick={handleLogOut} type="btn-ghost">Sign Out</button></li>
+                    <li className='font-semibold'><Link to='/dashboard'>Dashboard</Link></li>
+                    <li className='font-semibold'><button onClick={handleLogOut}>Sign Out</button></li>
                 </>
                 :
                 <li className='font-semibold'><Link to='/login'>Login</Link></li>
-        } */}
+        }
     </>
 
     return (
