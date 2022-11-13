@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -7,17 +7,19 @@ const Login = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { logIN } = useContext(AuthContext)
+    const [loginError, setLoginError] = useState('')
 
     const handleLogin = data => {
         console.log(data)
-
+        setLoginError(' ')
         logIN(data.email, data.password)
             .then((result) => {
                 const user = result.user;
                 console.log(user)
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error.message)
+                setLoginError(error.message)
             });
     }
 
@@ -49,6 +51,9 @@ const Login = () => {
 
 
                     <input className='btn btn-accent w-full text-white' value="Login" type="submit" />
+                    {
+                        loginError && <p className='text-red-500'>{loginError}</p>
+                    }
                     <p>New to Doctors Portal <Link className='text-secondary' to="/signup">Create new Account</Link></p>
                     <div className="divider">OR</div>
                     <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>

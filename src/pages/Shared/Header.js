@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Header = () => {
+
+    const { user } = useContext(AuthContext)
 
     const menuItem = <>
         <li className='font-semibold'><Link to='/'>Home</Link></li>
@@ -9,7 +12,11 @@ const Header = () => {
         <li className='font-semibold'><Link to='/appoinment'>Appoinment</Link></li>
         <li className='font-semibold'><Link to='/reviews'>Reviews</Link></li>
         <li className='font-semibold'><Link to='/contactUs'>Contact Us</Link></li>
-        <li className='font-semibold'><Link to='/login'>Login</Link></li>
+        {
+            user?.uid ? <li className='font-semibold'><Link to='/signup'>Sign out</Link></li>
+                :
+                <li className='font-semibold'><Link to='/login'>Login</Link></li>
+        }
         {/* {
             user?.email ?
                 <>
