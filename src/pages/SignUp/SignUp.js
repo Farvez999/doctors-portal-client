@@ -34,7 +34,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        navigate('/')
+                        saveUserDasboard(data.name, data.email)
                     }).catch((error) => {
                         console.log(error)
                     });
@@ -44,6 +44,22 @@ const SignUp = () => {
                 console.log(error)
                 setSignUpError(error.message)
             });
+    }
+
+    const saveUserDasboard = (name, email) => {
+        const user = { name, email };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                navigate('/')
+            })
     }
 
     const handleGoogleLogin = () => {
