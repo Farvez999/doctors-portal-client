@@ -34,7 +34,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-
+                        navigate('/')
                     }).catch((error) => {
                         console.log(error)
                     });

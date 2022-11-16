@@ -3,6 +3,7 @@ import bg from '../../assets/images/bg.png'
 import chair from '../../assets/images/chair.png'
 import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns'
+import InfoCard from '../Home/InfoCards/InfoCard';
 
 const AppoinmentBanner = ({ selectedDate, setSelectedDate }) => {
 
@@ -17,7 +18,13 @@ const AppoinmentBanner = ({ selectedDate, setSelectedDate }) => {
                             <DayPicker
                                 mode="single"
                                 selected={selectedDate}
-                                onSelect={setSelectedDate}
+                                onSelect={
+                                    (date) => {
+                                        if (date) {
+                                            setSelectedDate(date)
+                                        }
+                                    }
+                                }
                             />
                             <p>You have selected date: {format(selectedDate, 'PP')}</p>
                         </div>
