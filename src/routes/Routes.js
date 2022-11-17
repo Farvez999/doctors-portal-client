@@ -8,6 +8,7 @@ import Appoinment from "../pages/Appoinment/Appoinment";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: "/dashboard",
+        path: '/dashboard',
         element: <PrivateRoutes><DashBoardLayout></DashBoardLayout></PrivateRoutes>,
         children: [
             {
@@ -43,8 +44,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allusers',
-                element: <AllUsers></AllUsers>
-            }
+                element: <AdminRoutes><AllUsers></AllUsers></AdminRoutes>
+            },
         ]
-    },
+    }
 ]);
