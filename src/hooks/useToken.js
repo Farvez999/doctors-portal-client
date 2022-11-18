@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import InfoCard from "../pages/Home/InfoCards/InfoCard"
 
 export const useToken = email => {
 

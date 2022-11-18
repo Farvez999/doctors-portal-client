@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
-import { useAdmin } from '../hooks/useAdmin';
+import useAdmin from '../hooks/useAdmin';
 import Header from '../pages/Shared/Header';
 
 const DashBoardLayout = () => {
@@ -26,6 +26,7 @@ const DashBoardLayout = () => {
                         {
                             isAdmin && <>
                                 <li><Link to="/dashboard/allusers">All users</Link></li>
+                                <li><Link to="/dashboard/adddoctor">Add Doctor</Link></li>
                             </>
                         }
                     </ul>
