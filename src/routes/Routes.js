@@ -4,6 +4,7 @@ import AllUsers from "../Dashboard/AllUsers";
 import Dashboard from "../Dashboard/Dashboard/Dashboard";
 import MyAppoinment from "../Dashboard/Dashboard/MyAppoinment";
 import ManageDoctors from "../Dashboard/ManageDoctors";
+import Payment from "../Dashboard/Payment";
 import DashBoardLayout from "../layouts/DashBoardLayout";
 import Main from "../layouts/Main";
 import Appoinment from "../pages/Appoinment/Appoinment";
@@ -55,6 +56,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/managedoctors',
                 element: <AdminRoutes><ManageDoctors></ManageDoctors></AdminRoutes>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <AdminRoutes><Payment></Payment></AdminRoutes>,
+                loader: ({ params }) => (`http://localhost:5000/bookings/${params.id}`)
             },
         ]
     }
