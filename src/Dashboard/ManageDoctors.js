@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import ConfirmastionModal from '../pages/Shared/ConfirmastionModal';
 import Lodding from '../pages/Shared/Lodding';
 
@@ -25,12 +26,24 @@ const ManageDoctors = () => {
         }
     });
 
-    const closeModal = () => {
-        setDeletingDoctor(null)
+    const handleDeleteDoctor = doctor => {
+        fetch(`http://localhost:5000/doctors/${doctor._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`Doctor ${doctor.name} deleted successfully`)
+                }
+            })
     }
 
-    const handleDeleteDoctor = doctor => {
-        console.log(doctor)
+    const closeModal = () => {
+        setDeletingDoctor(null)
     }
 
     if (isLoading) {
@@ -39,7 +52,7 @@ const ManageDoctors = () => {
 
     return (
         <div>
-            <h3 className="text-3xl mb-5">Manage Doctor {doctors?.length}</h3>
+            <h3 className="text-3xl mb-5">Manage Doctor : {doctors?.length}</h3>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
