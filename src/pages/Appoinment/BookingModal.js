@@ -27,7 +27,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
             price
         }
 
-        fetch('https://doctors-portal-server-rose.vercel.app/bookings', {
+        fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

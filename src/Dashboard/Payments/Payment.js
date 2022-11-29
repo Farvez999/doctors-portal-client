@@ -1,6 +1,5 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { info } from 'daisyui/src/colors';
 import React from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import Lodding from '../../pages/Shared/Lodding';
@@ -11,15 +10,15 @@ const stripePromise = loadStripe('pk_test_51M6KI7Jb9nyriLWogAqiAzC5pxaHsA2MBPm7L
 
 const Payment = () => {
 
-    const navigation = useNavigate()
+    // const navigation = useNavigate()
 
     const booking = useLoaderData();
     const { treatment, price, appointmentDate, slot } = booking;
 
 
-    if (navigation.state === "loading") {
-        return <Lodding></Lodding>
-    }
+    // if (navigation.state === "loading") {
+    //     return <Lodding></Lodding>
+    // }
 
     return (
         <div>
